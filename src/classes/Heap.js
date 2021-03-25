@@ -1,3 +1,10 @@
+class Node {
+  constructor(priority, value) {
+    this.priority = priority;
+    this.value = value;
+  }
+}
+
 class Heap {
   constructor(config={}) {
     this.heap = [];
