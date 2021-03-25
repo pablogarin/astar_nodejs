@@ -8,8 +8,10 @@ const Button = styled.button`
   border: 1px solid #3333;
   margin: 0 10px;
   position: relative;
-  transition: box-shadow .3s ease;
+  transition: box-shadow .1s ease;
   cursor: pointer;
+  font-weight: bold;
+  color: ${props => props.textColor ? props.textColor : '#333d'};
   &:active, &:focus {
     outline: none;
   }

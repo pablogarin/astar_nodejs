@@ -2,6 +2,7 @@ import React, { useRef, useEffect, useState } from 'react';
 import Node from './classes/Node';
 import Heap from './classes/Heap';
 import Button from './styled/Button'
+import ButtonContainer from './styled/ButtonContainer'
 
 const colors = {
   WHITE: '#fff',
@@ -148,14 +149,16 @@ function App() {
 
   const selectNode = (e, override=false) => {
     if (isRunning) return;
-    const { pageX, pageY } = e;
-    if (pageX < 0 || pageX >= width || pageY < 0 || pageY >= width) {
+    const { pageX, pageY, target } = e;
+    const x = pageX - target.offsetLeft;
+    const y = pageY - target.offsetTop;
+    if (x < 0 || x >= width || y < 0 || y >= width) {
       setStartSelecting(false);
     }
     if (startSelecting || override) {
       const nodeSize = Math.floor(width/size);
-      const col = Math.floor(pageX/nodeSize);
-      const row = Math.floor(pageY/nodeSize);
+      const col = Math.floor(x/nodeSize);
+      const row = Math.floor(y/nodeSize);
       if (!matrix || !matrix[row] || !matrix[row][col]) return;
       const node = matrix[row][col];
       if (node) {
@@ -230,8 +233,10 @@ function App() {
           onClick={(e) => { selectNode(e, true) }}
         />
       </div>
-      <Button onClick={pathFinder} disabled={isRunning}>Start!</Button>
-      <Button onClick={clearNodes} disabled={isRunning}>Clear</Button>
+      <ButtonContainer>
+        <Button onClick={pathFinder} disabled={isRunning}>Start!</Button>
+        <Button onClick={clearNodes} disabled={isRunning}>Clear</Button>
+      </ButtonContainer>
     </div>
   );
 }
