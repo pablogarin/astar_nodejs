@@ -1,6 +1,7 @@
 import React, { useRef, useEffect, useState } from 'react';
 import Node from './classes/Node';
 import Heap from './classes/Heap';
+import Button from './styled/Button'
 
 const colors = {
   WHITE: '#fff',
@@ -132,6 +133,7 @@ function App() {
   const [startNode, setStartNode] = useState(null);
   const [endNode, setEndNode] = useState(null);
   const [matrix, setMatrix] = useState([]);
+  const [isRunning, setIsRunning] = useState(false);
   const width = 400;
   const size = 50;
 
@@ -145,6 +147,7 @@ function App() {
   }, [canvasRef]);
 
   const selectNode = (e, override=false) => {
+    if (isRunning) return;
     const { pageX, pageY } = e;
     if (pageX < 0 || pageX >= width || pageY < 0 || pageY >= width) {
       setStartSelecting(false);
@@ -187,6 +190,8 @@ function App() {
   }
 
   const pathFinder = async () => {
+    if (isRunning) return;
+    setIsRunning(true)
     if (startNode && endNode) {
       matrix.forEach(row => row.forEach(node => {
         if (!node.isStart && !node.isEnd && !node.isBlocked) {
@@ -204,6 +209,7 @@ function App() {
       }
       updateGrid();
     }
+    setIsRunning(false);
   }
 
   const clearNodes = () => {
@@ -215,15 +221,17 @@ function App() {
 
   return (
     <div className="App">
-      <canvas
-        ref={canvasRef}
-        onMouseDown={() => setStartSelecting(true)}
-        onMouseUp={() => setStartSelecting(false)}
-        onMouseMove={selectNode}
-        onClick={(e) => { selectNode(e, true) }}
-      />
-      <button onClick={pathFinder}>Start!</button>
-      <button onClick={clearNodes}>Clear</button>
+      <div>
+        <canvas
+          ref={canvasRef}
+          onMouseDown={() => setStartSelecting(true)}
+          onMouseUp={() => setStartSelecting(false)}
+          onMouseMove={selectNode}
+          onClick={(e) => { selectNode(e, true) }}
+        />
+      </div>
+      <Button onClick={pathFinder} disabled={isRunning}>Start!</Button>
+      <Button onClick={clearNodes} disabled={isRunning}>Clear</Button>
     </div>
   );
 }
