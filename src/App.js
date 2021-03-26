@@ -268,8 +268,8 @@ function App() {
         />
       </div>
       <ButtonContainer>
-        <Button onClick={pathFinder} disabled={isRunning}>Start!</Button>
-        <Button onClick={clearNodes} disabled={isRunning}>Clear</Button>
+        <Button onClick={pathFinder} disabled={!endNode || isRunning}>Start!</Button>
+        <Button onClick={clearNodes} disabled={!endNode || isRunning}>Clear</Button>
       </ButtonContainer>
     </div>
   );
