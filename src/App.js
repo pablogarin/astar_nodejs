@@ -236,7 +236,7 @@ function App() {
       <p style={{display: 'block', textAlign: 'center'}}>A* (A Star) is a path finding algorithm.<br/>
         It's an extension of the famous Dijkstra algorithm,<br/>
         but it uses a heuristic function to make an "informed"<br/>
-        decition on which way to go.</p>
+        decision on which way to go.</p>
         <Label color={colors.RED}>
           Start point:
           {' '}
