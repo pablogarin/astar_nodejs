@@ -4,6 +4,7 @@ import Heap from './classes/Heap';
 import Button from './styled/Button'
 import ButtonContainer from './styled/ButtonContainer'
 import Label from './styled/Label'
+import {PopOver, PopOverButton} from './styled/PopOver'
 import Title from './styled/Title'
 
 const colors = {
@@ -139,6 +140,7 @@ function App() {
   const [matrix, setMatrix] = useState([]);
   const [isRunning, setIsRunning] = useState(false);
   const [pathLength, setPathLength] = useState(null);
+  const [showPopover, setShowPopover] = useState(false);
   const width = 400;
   const size = 50;
 
@@ -233,11 +235,15 @@ function App() {
 
   return (
     <div className="App">
-      <Title>A* Algorithm</Title>
-      <p style={{display: 'block', textAlign: 'center'}}>A* (A Star) is a path finding algorithm.<br/>
-        It's an extension of the famous Dijkstra algorithm,<br/>
-        but it uses a heuristic function to make an "informed"<br/>
-        decision on which way to go.</p>
+      <Title>
+        A* Algorithm
+        <PopOverButton onClick={() => setShowPopover(!showPopover)}>
+          <PopOver bg={colors.BLACK} color={colors.WHITE} visible={showPopover}>A* (A Star) is a path finding algorithm.<br/>
+          It's an extension of the famous Dijkstra algorithm,<br/>
+          but it uses a heuristic function to make an "informed"<br/>
+          decision on which way to go.</PopOver>
+        </PopOverButton>
+      </Title>
         <Label color={colors.RED}>
           Start:
           {' '}
@@ -259,6 +265,10 @@ function App() {
             ? `${pathLength}`
             : 'N/A'}
         </Label>
+        { endNode && (<Label color={colors.BLACK}>
+          Wall: Click the grid to create walls
+          </Label>)
+        }
       <div>
         <canvas
           ref={canvasRef}
