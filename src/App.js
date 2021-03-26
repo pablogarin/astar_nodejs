@@ -265,10 +265,9 @@ function App() {
             ? `${pathLength}`
             : 'N/A'}
         </Label>
-        { endNode && (<Label color={colors.BLACK}>
+        <Label color={colors.BLACK}>
           Wall: Press down on your mouse on the grid and move to create walls
-          </Label>)
-        }
+        </Label>
       <div>
         <canvas
           ref={canvasRef}
