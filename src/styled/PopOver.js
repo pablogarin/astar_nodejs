@@ -39,6 +39,7 @@ export const PopOver = styled.div`
   height: 16px;
   border-radius: 50%;
   z-index: 100;
+  user-select: none;
   &:before {
     font-size: 12pt;
     display: block;

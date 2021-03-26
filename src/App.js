@@ -238,7 +238,7 @@ function App() {
       <Title>
         A* Algorithm
         <PopOverButton onClick={() => setShowPopover(!showPopover)}>
-          <PopOver bg={colors.BLACK} color={colors.WHITE} visible={showPopover}>A* (A Star) is a path finding algorithm.<br/>
+          <PopOver bg="#333E" color={colors.WHITE} visible={showPopover}>A* (A Star) is a path finding algorithm.<br/>
           It's an extension of the famous Dijkstra algorithm,<br/>
           but it uses a heuristic function to make an "informed"<br/>
           decision on which way to go.</PopOver>
@@ -266,7 +266,7 @@ function App() {
             : 'N/A'}
         </Label>
         { endNode && (<Label color={colors.BLACK}>
-          Wall: Click the grid to create walls
+          Wall: Press down on your mouse on the grid and move to create walls
           </Label>)
         }
       <div>
