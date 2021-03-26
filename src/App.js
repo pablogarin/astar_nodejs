@@ -3,6 +3,8 @@ import Node from './classes/Node';
 import Heap from './classes/Heap';
 import Button from './styled/Button'
 import ButtonContainer from './styled/ButtonContainer'
+import Label from './styled/Label'
+import Title from './styled/Title'
 
 const colors = {
   WHITE: '#fff',
@@ -135,6 +137,7 @@ function App() {
   const [endNode, setEndNode] = useState(null);
   const [matrix, setMatrix] = useState([]);
   const [isRunning, setIsRunning] = useState(false);
+  const [pathLength, setPathLength] = useState(null);
   const width = 400;
   const size = 50;
 
@@ -202,13 +205,17 @@ function App() {
         }
       }))
       updateGrid();
+      setPathLength(null);
       const result = await aStartPathFinding(startNode, endNode, matrix);
       if (result) {
+        let count = 0;
         let node = result[endNode].prev;
         while (!node.isStart) {
+          count += 1;
           node.color = colors.LIGHT_PURPLE;
           node = result[node].prev;
         }
+        setPathLength(count);
       }
       updateGrid();
     }
@@ -219,11 +226,38 @@ function App() {
     matrix.forEach(row => row.forEach(node => node.reset()));
     setStartNode(null);
     setEndNode(null);
+    setPathLength(null);
     updateGrid();
   }
 
   return (
     <div className="App">
+      <Title>A* Algorithm</Title>
+      <p style={{display: 'block', textAlign: 'center'}}>A* (A Star) is a path finding algorithm.<br/>
+        It's an extension of the famous Dijkstra algorithm,<br/>
+        but it uses a heuristic function to make an "informed"<br/>
+        decition on which way to go.</p>
+        <Label color={colors.RED}>
+          Start point:
+          {' '}
+          {startNode
+            ? `${startNode.col}, ${startNode.row}`
+            : 'Click on the grid to select a start point'}
+        </Label>
+        <Label color={colors.BLUE}>
+          End point:
+          {' '}
+          {endNode
+            ? `${endNode.col}, ${endNode.row}`
+            : 'Click on the grid to select an end point'}
+        </Label>
+        <Label color={colors.LIGHT_PURPLE}>
+          Shortest path length:
+          {' '}
+          {pathLength
+            ? `${pathLength}`
+            : 'N/A'}
+        </Label>
       <div>
         <canvas
           ref={canvasRef}
