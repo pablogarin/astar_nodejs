@@ -239,14 +239,14 @@ function App() {
         but it uses a heuristic function to make an "informed"<br/>
         decision on which way to go.</p>
         <Label color={colors.RED}>
-          Start point:
+          Start:
           {' '}
           {startNode
             ? `${startNode.col}, ${startNode.row}`
             : 'Click on the grid to select a start point'}
         </Label>
         <Label color={colors.BLUE}>
-          End point:
+          End:
           {' '}
           {endNode
             ? `${endNode.col}, ${endNode.row}`
