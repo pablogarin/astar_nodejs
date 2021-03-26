@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const Button = styled.button`
-  background: ${props => props.bg ? props.bg : '#9F9'};
+  background: ${props => props.bg ? props.bg : '#EFEFEF'};
   text-transform: uppercase;
   padding: 12px 16px;
   border-radius: 4px;
@@ -16,6 +16,7 @@ const Button = styled.button`
     transition: none;
     color: #888;
     background: #ccc;
+    cursor: not-allowed;
   }
   &:active, &:focus {
     outline: none;

@@ -12,6 +12,7 @@ const colors = {
   GRAY: '#999',
   BLUE: '#00F',
   RED: '#F00',
+  LIGHT_RED: '#F99',
   GREEN: '#0F0',
   LIGHT_GREEN: '#9F9',
   PURPLE: '#F0F',
@@ -268,8 +269,20 @@ function App() {
         />
       </div>
       <ButtonContainer>
-        <Button onClick={pathFinder} disabled={!endNode || isRunning}>Start!</Button>
-        <Button onClick={clearNodes} disabled={!endNode || isRunning}>Clear</Button>
+        <Button
+          onClick={pathFinder}
+          disabled={!endNode || isRunning}
+          bg={colors.LIGHT_GREEN}
+        >
+          Start!
+        </Button>
+        <Button
+          onClick={clearNodes}
+          disabled={!endNode || isRunning}
+          bg={colors.LIGHT_RED}
+        >
+          Clear
+        </Button>
       </ButtonContainer>
     </div>
   );
